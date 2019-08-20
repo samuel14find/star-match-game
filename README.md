@@ -66,3 +66,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### O jogo
+Esse joquinho é para a gente aprender uns poucos conceitos sobre React function componentes, React Hooks, e optimizing state
+e o outro lado sobre React Component Tree. O instrutor disponibilizou um template para a gente no seguinte endereço:
+[aqui](jsdrops.com/rgs3.1)
