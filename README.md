@@ -138,3 +138,34 @@ este state element e o React irá renderizar novamente o número de estrelas. O 
 >Sempre que você identificar um elemento que é usado na Interface e ele vai ser alterado, deveriamos colocar ele como 
 >um STATE ELEMENT
 
+Agora vamos pensar no seguinte. Necessitamos extrair alguma parte do componente StarMatch e transformer em componente. 
+De acordo com o instrutor devemos fazer o seguinte:
+> ... thinking about splitting responsibilities
+
+Devemos analisar cada situação. Porque se não corremos o risco de ter componentes em excesso ou componentes faltando. De 
+acordo com o instrutor devemos seguir o seguinte:
+> Every time in the UI you have many items that share similar data or bevavior, that's a candidate for and intem component
+
+Vamos pegar o painel que mostra os números. A cada momento que o jogador clicar no número, por trás dos panos, irá ser 
+chamado uma lógica que vai determinar se esse número é bom ou ruim. Essa pode ser uma pista de que esses números são 
+candidados a ser um Componente. O Instrutor escolheu eles para ser um componente. E qual será o nome desse componente? 
+O instrutor deixou claro que devemos tomar cuidado na nomeação de componentes. Por exemplo, ele resolver nomear esse component
+como Number. E esse componente irá receber um conjunto de props (propriedades). Lembrando que essa props tem que ser passado
+na hora que a gente chamar o componente. Pode até ter outro nome, mas nesse exemplo o instrutor colocou number mesmo. 
+Nota interessante do atributo Key que tinha no loop. Diz o instrutor que ele é necessário dentro do loop, então ele não vai 
+lá no componente, ele fica dentro do loop, portanto ele fica dentro do loop mas agora na chamada do componente. Abaixo
+temos um trecho do código, de como ficou lá na StarMatch.js na parte que chamava os números:
+```
+   <div className="right">
+                {utils.range(1,9).map(number =>
+                    <Number key={number} number={number}/>
+                )}
+            </div>
+```
+Tá vendo que estamos chamando o componente Number e passsando a key agora ? Mas então o instrutor chamou a atenção novamente
+do nome do componte que é Number. Não é verdade que possuímos um objeto JavaScript que se chama Number ? E isso vai ser 
+um problema para gente. Esse objeto JavaScript é usado, entre outras coisas, para converter strings em números. Então o 
+instrutor fez uma simulação onde ele passou, ao invez de um número, uma string lá no UseState, veja o trecho do código 
+abaixo.     
+
+
