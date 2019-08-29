@@ -178,5 +178,6 @@ de Number. Então segue a dica do instrutor:
 > Be aware of the top-level JavaScript objects in your scope, and do not override them
 
 A solução para eliminar ess conflito será a renomeação do componente. O instrutor sugeriu usar duas palavras, assim ele 
-passou o nome para PlayNumber. 
+passou o nome para PlayNumber. Depois adicionar um comportamento ao botão dos números. Quando eu clicar no botão do número 
+, neste momento, vou apenas exibir um console.log no terminal
 
