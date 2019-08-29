@@ -70,7 +70,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ### Minhas Notas - Samuel B
 Esse joquinho é para a gente aprender uns poucos conceitos sobre React function componentes, React Hooks, e optimizing state
 e o outro lado sobre React Component Tree. O instrutor disponibilizou um template para a gente no seguinte endereço:
-[aqui](jsdrops.com/rgs3.1). Neste template, temos um conteúdo estático, onde vamos fazer algumas alterações. Observer que 
+[aqui](jsdrops.com/rgs3.1). Neste template, temos um conteúdo estático, onde vamos fazer algumas alterações. Observar que 
 no componente StarMatch temos alguns objetos que vamos utilizar. Temos um objeto para lidar com as cores das estrelas, e 
 um objeto que foi chamado de utils que possui toda a ciências por trás de como o jogo functiona. Inicialmente no projeto
 temos duas divs. Uma div que tem o id de body, e duas divs aninhadas, uma com o id left que representa as estrelas, e a outra 
@@ -142,9 +142,9 @@ Agora vamos pensar no seguinte. Necessitamos extrair alguma parte do componente 
 De acordo com o instrutor devemos fazer o seguinte:
 > ... thinking about splitting responsibilities
 
-Devemos analisar cada situação. Porque se não corremos o risco de ter componentes em excesso ou componentes faltando. De 
+Devemos analisar cada situação. Porque se não, corremos o risco de ter componentes em excesso ou componentes faltando. De 
 acordo com o instrutor devemos seguir o seguinte:
-> Every time in the UI you have many items that share similar data or bevavior, that's a candidate for and intem component
+> Every time in the UI you have many items that share similar data or behavior, that's a candidate for and item component
 
 Vamos pegar o painel que mostra os números. A cada momento que o jogador clicar no número, por trás dos panos, irá ser 
 chamado uma lógica que vai determinar se esse número é bom ou ruim. Essa pode ser uma pista de que esses números são 
@@ -166,6 +166,17 @@ Tá vendo que estamos chamando o componente Number e passsando a key agora ? Mas
 do nome do componte que é Number. Não é verdade que possuímos um objeto JavaScript que se chama Number ? E isso vai ser 
 um problema para gente. Esse objeto JavaScript é usado, entre outras coisas, para converter strings em números. Então o 
 instrutor fez uma simulação onde ele passou, ao invez de um número, uma string lá no UseState, veja o trecho do código 
-abaixo.     
+abaixo.  
+`const [stars, setStars] = useState(utils.random("1",9)); // para ser usado para fazer um lopp e mostrar as estrelas aleatoriamente`
 
+Agora quando eu for lá no navegador, a renderização vai ficar estranha, vai aparecer mais que 9 estrelas em um certo momento. 
+Mas caso isso acontece temos uma solução. Basta chamar o constructor do Number do JavaScript fazendo desse jeito:
+`const [stars, setStars] = useState(utils.random(Number("1"),9)); `
+
+Mas ai, minha aplicação já não vai functionar. Notar que as estrelas sumiram. Isso tudo porque dei o nome do meu component
+de Number. Então segue a dica do instrutor:
+> Be aware of the top-level JavaScript objects in your scope, and do not override them
+
+A solução para eliminar ess conflito será a renomeação do componente. O instrutor sugeriu usar duas palavras, assim ele 
+passou o nome para PlayNumber. 
 

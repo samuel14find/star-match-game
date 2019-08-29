@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Number} from "./Number";
+import {PlayNumber} from "./PlayNumber";
 
 export function StarMatch (){
     const colors = {
@@ -37,7 +37,7 @@ export function StarMatch (){
         },
     };
 
-    const [stars, setStars] = useState(utils.random(1,9)); // para ser usado para fazer um lopp e mostrar as estrelas aleatoriamente
+    const [stars, setStars] = useState(utils.random(Number("1"),9)); // para ser usado para fazer um lopp e mostrar as estrelas aleatoriamente
 return(
     <div className="game">
         <div className="help">
@@ -51,7 +51,7 @@ return(
             </div>
             <div className="right">
                 {utils.range(1,9).map(number =>
-                    <Number key={number} number={number}/>
+                    <PlayNumber key={number} number={number}/>
                 )}
             </div>
         </div>
