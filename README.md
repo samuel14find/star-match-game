@@ -181,3 +181,38 @@ A solução para eliminar ess conflito será a renomeação do componente. O ins
 passou o nome para PlayNumber. Depois adicionar um comportamento ao botão dos números. Quando eu clicar no botão do número 
 , neste momento, vou apenas exibir um console.log no terminal
 
+E como exatamente essa function de click funciona ? Aqui entra o conceito de closure. Lá no onClick, temos uma function 
+que é invocada a cada vez que o usuário clica no botão. Mas como é acessado o número de cada botão? 
+> The onClick handler is a function within another function, the PlayNumber function, so focusing on just the PlayNumber 
+>, we created nine top functions and then nine click handler functions in them. Each onClick function here closes over the
+>scope of its owner number and gives us access to its props. We have nine onClick handler and all have different closures 
+>closing over differents scopes. 
+
+Assim extraimos um componente que representa o número, PlayNumber, de modo que isso significa reusabilidade. Podemos também
+extrair um componente que representa as estrelas. Vamos chamar esse componente de StartDisplay. Fazendo assim, deixamos o código
+lá no StarMatch mais legível fazendo simplesmente assim:
+```
+<div className = "left)>
+    <StarsDisplay />
+</div>
+```
+Agora tive que fazer um pouco diferente no meu componente StarsDisplay. Inicialmente não pude aproveitar o método range 
+do objeto utils criado lá no StarMatch. O que eu fiz fou exportar o utils fazendo assim, lá no StarMatch:
+`export const utils = {...}`
+
+E depois lá no componente StarsDisplay eu fiz uma importação:
+`import {utils} from "./StarMatch";`
+
+Agora observe o código do StarsDislay abaixo e observe como não pude chamar utils de dentro do return():
+
+```
+export function StarsDisplay(props) {
+  let Range = utils.range(1, props.count);
+  return(
+      Range.map(starId =>
+          <div key={starId} className="star"></div>
+      )
+  )
+}
+```
+Não sei se isso é uma boa prática, mas foi assim que fiz para acompanhar a aula do instrutor. 
