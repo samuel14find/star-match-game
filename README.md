@@ -216,3 +216,60 @@ export function StarsDisplay(props) {
 }
 ```
 Não sei se isso é uma boa prática, mas foi assim que fiz para acompanhar a aula do instrutor. 
+
+Seguindo na aula, a nota interface deve **descrever exatamente todos os State Elements** da nossa aplicação. Até agora 
+temos apenas uma descrição exata das estrelas que é um State Element. Quer dizer, a UI sabe descrever as estrelas. 
+O que acontece quando eu clico em um botão que representa um número? Clicaremos em um número e baseado em alguma lógica a cor muda.
+O que queremos fazer, e alterar o State na aplicação e refletir essa alteração na UI.
+Nesse momento devemos criar outros State Elements que serão úteis para trabalharmos com a interface. 
+Inicialmente fazer fazer uma lógica na lado da interface. Em relação a comportamentos da nossa aplicação devemos ter 2 conceitos 
+em mente:
+-   App Logic to Change State 
+-   UI logic to determinate State
+A lógica na interface será a que vamos ver na tela. Então ela será a primeira coisa que vamos mudar. Geralmente vai ser 
+mais fácil fazer essa parte primeiro.
+
+Então qual State Element devo criar ? O instrutor chamou eles de _Containers of Data_. O instrutor pensou em 4 State Elements 
+inicialmente. Um para represetar o número candidado, um para representar número errado, um para representar número usado, e outro
+para representar número disponível. De acordo com o instrutor:
+> Which of these containers should we place on the state to enable us to describe all the possible states?
+>In React stateful Componentes is that yoy should minimize the state
+
+Não devemos deixar um State Element que pode ser calculado a partir de outro. Então ele apenas criou availableNums e candidateNums.
+Quando foi criado esses States o instrutor disse que como estamos fazendo alterações apenas na UI podemos usar Mock Values, ou 
+valores simulados. Sendo assim observe abaixo como ele simulou alguns valores:
+
+```
+const [availableNums, setAvailableNums] = useState([1,2,3,4,5]);
+const [candidateNums, setCanditateNums] = useState([2,3]);
+``` 
+
+Agora qual tipo de dado devemos passar para o componente PlayNumbers de modo que ele vai se renderizar novamente e mudar de cor ?
+Até poderiamos passar diretamente um State Element, mas de acordo com o instrutor, o PlayNumber deve ter sua vida facilitada 
+e não tratar com essas questões. 
+> Single Play Number doesn't care about all the available numbers. It doesn't care about all the candidate number
+
+Ele deve apenas saber como será renderizado, com qual cor e pronto. Sendo assim o instrutor 
+decidiu passar apenas um String para ele, com determinado Status. 
+
+Para isso o instrutor criou uma function chamada numberStatus e passou como parâmetro o número. Aí dentro dessa function, 
+baseado no parâmetro que ela receber, vai decidir qual status retornar, que por sua vez será enviado para o PlayNumber 
+e lá dentro vai chamar a const colors. Observe o código da numberStatus:
+```
+const numberStatus = (number) =>{
+        if(!availableNums.includes(number)){
+            return 'used'
+        }
+        if(candidateNums.includes(number)){
+            return candidateAreWrong ? 'wrong': 'candidate'
+        }
+        return 'available'
+    };
+``` 
+Observe o método includes que é um método da Array que irá retornar true se o elemento estiver dentro da array ou false 
+caso contrário. E observe também na segunda if, um cont chamada candidateAreWrong. Isso é porque mesmo se o número 
+vai na condição de candidade ele ainda pode ser um numero errado. Olha a logia dele:
+`const candidateAreWrong = utils.sum(candidateNums) > stars;`
+Simplesmente haverá uma soma dos elementos da array candidateNume e se for maior que a quantidade de estrelas, logicamente 
+será um número errado. 
+E no final se não cair em nenhuma das ifs, o retorno padrão é available. 
